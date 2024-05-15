@@ -20,7 +20,7 @@ export default function Create() {
   };
 
   return (
-    <section className=" mt-40 w-1/2 mx-auto">
+    <section className=" mt-24 w-1/2 mx-auto">
       <h2 className=" text-center text-3xl font-bold uppercase">Create Page</h2>
       <p className="text-center text-sm font-medium text-gray-400">
         Create Your Own New Post now
