@@ -18,16 +18,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <section className=" w-1/2 mx-auto font-mono">
-          <nav className="flex justify-between items-center my-10">
-            <Link href={"/"} className=" text-4xl font-bold uppercase hover:scale-95 duration-300">
-              Simple Share
+        <section className=" w-full md:w-1/2 mx-auto font-mono px-4 md:px-0">
+          <nav className="flex justify-between md:items-center my-5 md:my-10 border-b border-b-gray-600 pb-3 ">
+            <Link
+              href={"/"}
+              className=" text-4xl font-bold uppercase hover:scale-95 duration-300"
+            >
+              SimpleShare
             </Link>
             <Link
-              href={"/post/create"}
-              className=" text-white bg-black font-medium px-2 py-2 rounded-md active:scale-95 duration-200"
+              href={"/posts/create"}
+              className=" text-white bg-black font-medium text-2xl px-3 py-1 rounded-md active:scale-95 duration-200 w-fit"
             >
-              Create New Post
+              +
             </Link>
           </nav>
           <div>{children}</div>
