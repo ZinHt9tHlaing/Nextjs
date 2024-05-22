@@ -1,31 +1,28 @@
-import { db } from "@/db/index";
-import { redirect } from "next/navigation";
+"use client"
+
+import { createPost } from "@/app/actions";
+import { useFormState } from "react-dom";
 
 export default function Create() {
-  const createPost = async (formData: FormData) => {
-    "use server";
-
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-
-    const post = await db.post.create({
-      data: {
-        title,
-        description,
-      },
-    });
-      console.log(post);
-      
-      redirect("/")
+  const initialState = {
+    message: "",
   };
 
+  const [createFormState, createPostAction] = useFormState(
+    createPost,
+    initialState
+  );
+
   return (
-    <section className="mt-12 mt-24 md:w-1/2 mx-auto">
+    <section className="mt-12 md:mt-24 md:w-1/2 mx-auto">
       <h2 className=" text-center text-3xl font-bold uppercase">Create Page</h2>
       <p className="text-center text-sm font-medium text-gray-400">
         Create Your Own New Post now
       </p>
-      <form className=" mt-6" action={createPost}>
+      <form className=" mt-6" action={createPostAction}>
+        {createFormState.message && (
+          <p className=" text-red-500 text-center py-1 mt-4">{createFormState.message}</p>
+        )}
         <div className=" mb-4">
           <label htmlFor="title" className=" text-lg font-medium text-gray-600">
             Title

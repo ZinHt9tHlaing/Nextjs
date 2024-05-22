@@ -1,5 +1,9 @@
-import { db } from "@/db";
-import { notFound, redirect } from "next/navigation";
+"use client";
+
+import { getOldPost, updatePost } from "@/app/actions";
+
+import { useEffect, useState } from "react";
+import { useFormState } from "react-dom";
 
 interface EditInterface {
   params: {
@@ -7,35 +11,28 @@ interface EditInterface {
   };
 }
 
-export default async function EditPage(props: EditInterface) {
+export default function EditPage(props: EditInterface) {
+  const [oldPost, setOldPost] = useState<{
+    id: number;
+    title: string;
+    description: string;
+  } | null>(null);
+
   const id = parseInt(props.params.id);
 
-  const oldPost = await db.post.findFirst({
-    where: { id },
+  const [editFormState, editFormAction] = useFormState(updatePost, {
+    message: "",
+    id,
   });
 
-  if (!oldPost) {
-    return notFound();
-  }
-
-  const updatePost = async (formData: FormData) => {
-    "use server";
-
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-
-    await db.post.update({
-      where: {
-        id,
-      },
-      data: {
-        title,
-        description,
-      },
-    });
-      
-      redirect(`/posts/${id}`);
+  const getOldData = async () => {
+    const post = await getOldPost(id);
+    setOldPost(post);
   };
+
+  useEffect(() => {
+    getOldData();
+  }, []);
 
   return (
     <section className="mt-12 w-full md:mt-24 md:w-1/2 mx-auto">
@@ -43,7 +40,12 @@ export default async function EditPage(props: EditInterface) {
       <p className="text-center text-sm font-medium text-gray-400">
         update Your post here.
       </p>
-      <form className=" mt-6" action={updatePost}>
+      {editFormState.message && (
+        <p className=" text-red-500 text-center py-1 mt-4">
+          {editFormState.message}
+        </p>
+      )}
+      <form className=" mt-6" action={editFormAction}>
         <div className=" mb-4">
           <label htmlFor="title" className=" text-lg font-medium text-gray-600">
             Title
