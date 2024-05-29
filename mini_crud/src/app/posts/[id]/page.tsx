@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
@@ -27,6 +28,9 @@ export default async function PostDetails(props: PostDetailsInterface) {
     await db.post.delete({
       where: { id },
     });
+
+    revalidatePath("/");
+
     redirect("/");
   };
 
@@ -56,3 +60,13 @@ export default async function PostDetails(props: PostDetailsInterface) {
     </div>
   );
 }
+
+export const generateStaticParams = async () => {
+  const posts = await db.post.findMany();
+
+  return posts.map((post) => {
+    return {
+      id: post.id.toString(),
+    };
+  });
+};

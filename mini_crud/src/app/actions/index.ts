@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/db";
+import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 
 export const createPost = async (
@@ -28,6 +29,8 @@ export const createPost = async (
       description,
     },
   });
+
+  revalidatePath("/");
 
   redirect("/");
 };
@@ -73,6 +76,8 @@ export const updatePost = async (
       description,
     },
   });
+
+  revalidatePath("/");
 
   redirect(`/`);
 };
