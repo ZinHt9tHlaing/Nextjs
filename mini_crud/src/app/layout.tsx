@@ -35,7 +35,7 @@ export default function RootLayout({
           </nav>
           <div>{children}</div>
           <footer>
-            <p className=" my-10 text-center font-medium text-sm text-gray-500">Copyright &#169; 2024 Christ</p>
+            <p className=" my-10 text-center font-medium text-lg text-gray-500">Copyright &#169; 2024 Christ</p>
           </footer>
         </section>
       </body>
