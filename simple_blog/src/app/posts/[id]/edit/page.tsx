@@ -1,31 +1,47 @@
-import { db } from "@/db/index";
-import { redirect } from "next/navigation";
+import { db } from "@/db";
+import { notFound, redirect } from "next/navigation";
 
-export default function Create() {
-  const createPost = async (formData: FormData) => {
+interface EditPageInterface {
+  params: {
+    id: string;
+  };
+}
+
+export default async function EditPage(props: EditPageInterface) {
+  const id = parseInt(props.params.id);
+
+  const oldPost = await db.post.findFirst({
+    where: { id },
+  });
+
+  if (!oldPost) {
+    return notFound();
+  }
+
+  const updatePost = async (formData: FormData) => {
     "use server";
 
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
 
-    const post = await db.post.create({
+    await db.post.update({
+      where: { id },
       data: {
         title,
         description,
       },
     });
-      console.log(post);
 
-      redirect("/")
+    redirect(`/posts/${oldPost?.id}`);
   };
 
   return (
     <section className="mt-12 md:mt-28 md:w-1/2 mx-auto font-mono">
-      <h1 className=" text-center text-2xl md:text-3xl font-sans md:font-mono font-bold uppercase">Create Post</h1>
+      <h1 className=" text-center text-2xl md:text-3xl font-sans md:font-mono font-bold uppercase">Update Post</h1>
       <p className="text-center text-sm font-medium text-gray-600">
-        create your own new post now.
+        update your post here.
       </p>
-      <form className=" mt-6" action={createPost}>
+      <form className=" mt-6" action={updatePost}>
         <div className=" mb-4">
           <label htmlFor="title" className=" md:text-lg font-medium text-gray-600">
             Title
@@ -35,6 +51,7 @@ export default function Create() {
             id="title"
             name="title"
             className="w-full p-2 block outline-none rounded border border-gray-600 focus:border-4 duration-200"
+            defaultValue={oldPost?.title}
           />
         </div>
         <div className="mb-4">
@@ -48,14 +65,15 @@ export default function Create() {
             rows={7}
             id="description"
             name="description"
-            className="w-full p-2 block outline-none rounded border border-gray-600 focus:border-4 duration-200"
+            className="w-full p-2 block scroll-smooth outline-none rounded border border-gray-600 focus:border-4 duration-200"
+            defaultValue={oldPost?.description}
           ></textarea>
         </div>
         <button
           type="submit"
-          className=" bg-black text-white text-center w-full py-4 mt-4 md:text-lg font-bold rounded hover:bg-gray-800 active:bg-black duration-200"
+          className=" bg-black text-white text-center w-full py-4 mt-4 md:text-lg font-bold rounded active:bg-black hover:bg-gray-800 active:ring-2 active:ring-gray-700 duration-200"
         >
-          Post
+          Update
         </button>
       </form>
     </section>

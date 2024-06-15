@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,9 +16,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
-        <section className=" w-1/2 mx-auto">{children}</section>
+        <section className=" md:w-1/2 mx-auto px-4 md:px-0">
+          <nav className=" flex md:items-center justify-between my-5 md:my-10 border-b border-b-gray-600 pb-3">
+            <Link
+              href={"/"}
+              className="text-3xl font-bold uppercase hover:drop-shadow-2xl duration-200"
+            >
+              SimpleShare
+            </Link>
+            <Link
+              href={"/posts/create"}
+              className=" text-white bg-black text-2xl rounded-md font-medium py-1 px-3 w-fit hover:bg-gray-700 active:bg-black active:ring-2 active:ring-gray-700 active:scale-95 duration-200"
+            >
+              {/* Create new post */}
+              +
+            </Link>
+          </nav>
+          <div>{children}</div>
+        </section>
       </body>
     </html>
   );
