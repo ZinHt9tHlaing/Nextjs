@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <section>
+        <section className="px-5 md:px-0">
           <nav className="flex justify-between items-center max-w-4xl mx-auto py-10">
             <Link
               href={"/"}

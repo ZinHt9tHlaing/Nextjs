@@ -28,7 +28,7 @@ export default function RootLayout({
             </Link>
             <Link
               href={"/posts/create"}
-              className=" text-white bg-black text-2xl rounded-md font-medium py-1 px-3 w-fit hover:bg-gray-700 active:bg-black active:ring-2 active:ring-gray-700 active:scale-95 duration-200"
+              className=" text-white bg-black text-2xl rounded-md font-medium py-[3px] px-3 w-fit hover:bg-gray-700 active:bg-black active:ring-2 active:ring-gray-700 active:scale-95 duration-200"
             >
               {/* Create new post */}
               +
