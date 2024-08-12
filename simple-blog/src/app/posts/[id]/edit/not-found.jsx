@@ -7,7 +7,7 @@ export default function notFoundPage() {
           Not Found <span className=" font-extrabold text-red-600">!</span>
         </p>
         <p className=" text-gray-500 text-sm font-semibold">
-          Something went wrong 
+          Something went wrong
         </p>
       </div>
     </section>

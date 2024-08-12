@@ -9,13 +9,13 @@ interface PostDetailsInterface {
 }
 
 export default async function PostDetails(props: PostDetailsInterface) {
-  await new Promise((r) => setTimeout(r, 2000));
-
-  const id = parseInt(props.params.id);
+  const postId = parseInt(props.params.id);
 
   const post = await db.post.findFirst({
-    where: { id },
+    where: { id: postId },
   });
+
+  // console.log(post)
 
   if (!post) {
     return notFound();
@@ -23,11 +23,9 @@ export default async function PostDetails(props: PostDetailsInterface) {
 
   const deletePost = async () => {
     "use server";
-
     await db.post.delete({
-      where: { id },
+      where: { id: postId },
     });
-
     redirect("/")
   };
 
@@ -44,7 +42,7 @@ export default async function PostDetails(props: PostDetailsInterface) {
           >
             Edit
           </Link>
-          <form action={deletePost} className=" inline">
+          <form className="inline" action={deletePost}>
             <button
               type="submit"
               className="text-white bg-red-600 rounded-md font-medium p-2 hover:bg-red-500 active:scale-95 duration-200"
@@ -54,7 +52,7 @@ export default async function PostDetails(props: PostDetailsInterface) {
           </form>
         </div>
       </div>
-      <p className="tracking-wider sm:text-sm md:font-medium font-serif">
+      <p className="tracking-wider sm:text-sm md:font-semibold font-serif">
         {post?.description}
       </p>
     </div>

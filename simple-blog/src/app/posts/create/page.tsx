@@ -1,6 +1,5 @@
-import { db } from "@/db/index";
+import { db } from "@/db";
 import { redirect } from "next/navigation";
-
 export default function Create() {
   const createPost = async (formData: FormData) => {
     "use server";
@@ -14,27 +13,31 @@ export default function Create() {
         description,
       },
     });
-      console.log(post);
-
-      redirect("/")
+    // console.log(post);
+    redirect("/");
   };
 
   return (
     <section className="mt-12 md:mt-28 md:w-1/2 mx-auto font-mono">
-      <h1 className=" text-center text-2xl md:text-3xl font-sans md:font-mono font-bold uppercase">Create Post</h1>
+      <h1 className=" text-center text-2xl md:text-3xl font-sans md:font-mono font-bold uppercase">
+        Create Post
+      </h1>
       <p className="text-center text-sm font-medium text-gray-600">
         create your own new post now.
       </p>
       <form className=" mt-6" action={createPost}>
         <div className=" mb-4">
-          <label htmlFor="title" className=" md:text-lg font-medium text-gray-600">
+          <label
+            htmlFor="title"
+            className=" md:text-lg font-medium text-gray-600"
+          >
             Title
           </label>
           <input
             type="text"
             id="title"
             name="title"
-            className="w-full p-2 block outline-none rounded border border-gray-600 focus:border-4 duration-200"
+            className="w-full p-2 block outline-none rounded border border-gray-600 focus-visible:outline-none focus:ring-1 focus:ring-black focus:shadow-lg duration-200"
           />
         </div>
         <div className="mb-4">
@@ -48,7 +51,7 @@ export default function Create() {
             rows={7}
             id="description"
             name="description"
-            className="w-full p-2 block outline-none rounded border border-gray-600 focus:border-4 duration-200"
+            className="w-full p-2 block outline-none rounded border border-gray-600 focus-visible:outline-none focus:ring-1 focus:ring-black focus:shadow-lg duration-200"
           ></textarea>
         </div>
         <button

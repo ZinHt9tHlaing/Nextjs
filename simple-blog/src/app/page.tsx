@@ -7,7 +7,10 @@ export default async function Posts() {
   return (
     <section className=" grid grid-cols-1 md:grid-cols-2 gap-3">
       {posts.map((post) => (
-        <div key={post.id} className=" border border-black p-3">
+        <div
+          key={post.id}
+          className=" border border-black p-3 rounded hover:shadow-lg hover:ring-1 hover:ring-gray-700 duration-300"
+        >
           <h4 className=" font-bold text-xl uppercase tracking-wide">
             {post.title}
           </h4>
