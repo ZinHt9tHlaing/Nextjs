@@ -52,7 +52,7 @@ export default async function PostDetails(props: PostDetailsInterface) {
           </form>
         </div>
       </div>
-      <p className="tracking-wider sm:text-sm md:font-semibold font-serif">
+      <p className="tracking-wider sm:text-sm md:text-base md:font-medium">
         {post?.description}
       </p>
     </div>

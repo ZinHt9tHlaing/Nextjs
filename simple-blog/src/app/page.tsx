@@ -3,6 +3,7 @@ import Link from "next/link";
 
 export default async function Posts() {
   const posts = await db.post.findMany();
+  // console.log(posts)
 
   return (
     <section className=" grid grid-cols-1 md:grid-cols-2 gap-3">

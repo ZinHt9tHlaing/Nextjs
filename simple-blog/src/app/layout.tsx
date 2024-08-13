@@ -22,7 +22,7 @@ export default function RootLayout({
           <nav className=" flex md:items-center justify-between my-5 md:my-10 border-b border-b-gray-600 pb-3">
             <Link
               href={"/"}
-              className="text-3xl font-bold uppercase hover:drop-shadow-2xl duration-200"
+              className="text-3xl font-bold uppercase hover:text-shadow-md duration-200"
             >
               SimpleShare
             </Link>

@@ -1,5 +1,8 @@
-import { db } from "@/db";
-import { notFound, redirect } from "next/navigation";
+"use client";
+
+import { getOldPost, updatePost } from "@/actions";
+import { useEffect, useState } from "react";
+import { useFormState } from "react-dom";
 
 interface EditPageInterface {
   params: {
@@ -7,33 +10,28 @@ interface EditPageInterface {
   };
 }
 
-export default async function EditPage(props: EditPageInterface) {
+export default function EditPage(props: EditPageInterface) {
   const postId = parseInt(props.params.id);
 
-  const oldPost = await db.post.findFirst({
-    where: { id: postId },
+  const [oldPost, setOldPost] = useState<{
+    id: number;
+    title: string;
+    description: string;
+  } | null>(null);
+
+  const [updateFormState, updateFormAction] = useFormState(updatePost, {
+    message: "",
+    id: postId,
   });
 
-  if (!oldPost) {
-    return notFound();
-  }
-
-  const updatePost = async (formData: FormData) => {
-    "use server";
-
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-
-    await db.post.update({
-      where: { id: postId },
-      data: {
-        title,
-        description,
-      },
-    });
-
-    redirect(`/posts/${oldPost.id}`);
+  const getOldData = async () => {
+    const post = await getOldPost(postId);
+    setOldPost(post);
   };
+
+  useEffect(() => {
+    getOldData();
+  }, []);
 
   return (
     <section className="mt-12 md:mt-28 md:w-1/2 mx-auto font-mono">
@@ -43,7 +41,13 @@ export default async function EditPage(props: EditPageInterface) {
       <p className="text-center text-sm font-medium text-gray-600">
         update your post here.
       </p>
-      <form className=" mt-6" action={updatePost}>
+      {updateFormState.message && (
+        <p className=" bg-red-500 text-white text-sm text-center py-2 mt-4">
+          {updateFormState.message}
+        </p>
+      )}
+
+      <form className=" mt-6" action={updateFormAction}>
         <div className=" mb-4">
           <label
             htmlFor="title"
