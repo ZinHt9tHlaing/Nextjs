@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
+const date = new Date();
 
 export const metadata: Metadata = {
   title: "Next App Text",
@@ -34,6 +35,9 @@ export default function RootLayout({
             </Link>
           </nav>
           <div>{children}</div>
+          <footer>
+            <p className=" my-10 text-center font-medium text-sm text-gray-500">Copyright &copy; {date.getFullYear()} by Christ_M@X.</p>
+          </footer>
         </section>
       </body>
     </html>
