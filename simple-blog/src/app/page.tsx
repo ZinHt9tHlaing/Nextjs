@@ -7,26 +7,39 @@ export default async function Posts() {
   // console.log(posts)
 
   return (
-    <section className=" grid grid-cols-1 md:grid-cols-2 gap-3">
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          className=" border border-black p-3 rounded hover:shadow-lg hover:ring-1 hover:ring-gray-700 duration-300"
-        >
-          <h4 className=" font-bold text-xl uppercase tracking-wide">
-            {post.title}
-          </h4>
-          <p className=" line-clamp-3 my-2 tracking-widest font-mono text-gray-700">
-            {post.description}
-          </p>
+    <>
+      {posts.length < 1 && (
+        <p className=" font-medium text-red-500 text-center my-36">
+          No data to show.{" "}
           <Link
-            href={`/posts/${post.id}`}
-            className=" p-1 bg-black text-sm text-white font-medium hover:bg-gray-800 active:bg-black active:ring-2 active:ring-gray-700 duration-200"
+            href={"/posts/create"}
+            className=" font-bold underline text-black hover:text-shadow-md duration-300"
           >
-            read more
+            Create post here
           </Link>
-        </div>
-      ))}
-    </section>
+        </p>
+      )}
+      <section className=" grid grid-cols-1 md:grid-cols-2 gap-3">
+        {posts.map((post) => (
+          <div
+            key={post.id}
+            className=" border border-black p-3 rounded hover:shadow-lg hover:ring-1 hover:ring-gray-700 duration-300"
+          >
+            <h4 className=" font-bold text-xl uppercase tracking-wide">
+              {post.title}
+            </h4>
+            <p className=" line-clamp-3 my-2 tracking-widest font-mono text-gray-700">
+              {post.description}
+            </p>
+            <Link
+              href={`/posts/${post.id}`}
+              className=" p-1 bg-black text-sm text-white font-medium hover:bg-gray-800 active:bg-black active:ring-2 active:ring-gray-700 duration-200"
+            >
+              read more
+            </Link>
+          </div>
+        ))}
+      </section>
+    </>
   );
 }

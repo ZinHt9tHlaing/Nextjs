@@ -17,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth ">
       <body className={inter.className}>
-        <section className="w-1/2 mx-auto">
+        <section className="w-1/2 mx-auto flex flex-col h-screen">
           <nav className=" flex md:items-center justify-between my-5 md:my-10 border-b border-b-gray-600 pb-3">
             <Link
               href={"/"}
@@ -35,8 +35,11 @@ export default function RootLayout({
             </Link>
           </nav>
           <div>{children}</div>
-          <footer>
-            <p className=" my-10 text-center font-medium text-sm text-gray-500">Copyright &copy; {date.getFullYear()} by Christ_M@X.</p>
+          <footer className=" mt-auto text-gray-300 rounded-t bg-black py-2 text-center">
+            <p className=" font-semibold text-sm mx-auto">
+              Copyright &copy; {date.getFullYear()} by{" "}
+              <span className="font-bold text-gray-100">Christ_M@X</span>.
+            </p>
           </footer>
         </section>
       </body>
