@@ -3,7 +3,7 @@ import Link from "next/link";
 
 // export const dynamic = "force-dynamic";
 export default async function Posts() {
-  const posts = await db.post.findMany();
+  const posts = await db.post.findMany({ orderBy: { id: "desc" } });
   // console.log(posts)
 
   return (
