@@ -6,12 +6,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/schema";
 import { z } from "zod";
 import { format } from "node:path/win32";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { GithubIcon } from "lucide-react";
+import { handleGithubLogin } from "@/lib/actions";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
@@ -26,7 +34,7 @@ const LoginForm = () => {
   });
 
   const handleSubmitHandler = (data: z.infer<typeof LoginSchema>) => {
-    setLoading(true)
+    setLoading(true);
     console.log(data);
   };
 
@@ -88,14 +96,20 @@ const LoginForm = () => {
             disabled={pending}
             className="w-full bg-gray-700 text-white active:scale-95 duration-200"
           >
-            {loading ? <p className=" animate-pulse">Requesting...</p> : "Login"}
+            {loading ? (
+              <p className=" animate-pulse">Requesting...</p>
+            ) : (
+              "Login"
+            )}
           </Button>
         </form>
       </Form>
       <p className="my-4 text-muted-foreground text-center text-sm">or</p>
-      <Button className="bg-black w-full hover:bg-gray-900 active:scale-95 duration-200">
-        <GithubIcon className="mr-2 h-4 w-4" /> Continue with Github
-      </Button>
+      <form action={handleGithubLogin}>
+        <Button className="bg-black w-full hover:bg-gray-900 active:scale-95 duration-200">
+          <GithubIcon className="mr-2 h-4 w-4" /> Continue with Github
+        </Button>
+      </form>
     </CardWrapper>
   );
 };

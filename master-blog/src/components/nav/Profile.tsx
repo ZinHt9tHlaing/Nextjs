@@ -5,6 +5,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "../ui/button";
 import { ChevronDown, LogOut, Settings, User, User2 } from "lucide-react";
 import { auth } from "@/lib/auth";
@@ -23,7 +24,13 @@ const Profile = async () => {
             variant={"outline"}
             className=" w-44 border border-black flex justify-between"
           >
-            <User className=" size-4" />
+            <div>
+              <Avatar>
+                <AvatarImage src={session?.user?.image as string} />
+                <AvatarFallback>{session?.user?.name}</AvatarFallback>
+              </Avatar>
+            </div>
+
             {session?.user && session.user.name}
             <ChevronDown className=" size-4" />
           </Button>
