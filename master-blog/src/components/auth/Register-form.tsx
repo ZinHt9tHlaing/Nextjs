@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import { GithubIcon } from "lucide-react";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
+import { handleGithubLogin } from "@/lib/actions";
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
@@ -136,14 +137,20 @@ const RegisterForm = () => {
             disabled={pending}
             className="w-full bg-gray-700 text-white active:scale-95 duration-200"
           >
-            {loading ? <p className=" animate-pulse">Requesting...</p> : "Register"}
+            {loading ? (
+              <p className=" animate-pulse">Requesting...</p>
+            ) : (
+              "Register"
+            )}
           </Button>
         </form>
       </Form>
       <p className="my-4 text-muted-foreground text-center text-sm">or</p>
-      <Button className="bg-black w-full hover:bg-gray-900 active:scale-95 duration-200">
-        <GithubIcon className="mr-2 h-4 w-4" /> Continue with Github
-      </Button>
+      <form action={handleGithubLogin}>
+        <Button className="bg-black w-full hover:bg-gray-900 active:scale-95 duration-200">
+          <GithubIcon className="mr-2 h-4 w-4" /> Continue with Github
+        </Button>
+      </form>
     </CardWrapper>
   );
 };
