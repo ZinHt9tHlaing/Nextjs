@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { handleGithubLogout } from "@/lib/actions";
 import { auth } from "@/lib/auth";
 
 export default async function Home() {
@@ -7,12 +6,8 @@ export default async function Home() {
   console.log(session);
 
   return (
-    <main className="flex justify-center items-center space-x-2">
-      <form action={handleGithubLogout}>
-        <Button variant={"destructive"} className="">
-          Logout
-        </Button>
-      </form>
+    <main className="flex justify-center items-center space-x-2 mt-10">
+     <h1>Home Page</h1>
     </main>
   );
 }
