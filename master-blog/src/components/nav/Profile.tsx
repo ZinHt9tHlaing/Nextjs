@@ -21,7 +21,7 @@ const Profile = async () => {
           <Button
             size={"sm"}
             variant={"outline"}
-            className=" w-44 border-2 border-black flex justify-between"
+            className=" w-44 border border-black flex justify-between"
           >
             <User className=" size-4" />
             {session?.user && session.user.name}
