@@ -17,13 +17,12 @@ import { log } from "console";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { GithubIcon } from "lucide-react";
-import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import { handleGithubLogin } from "@/lib/actions";
+import { handleGithubLogin, registerHandler } from "@/lib/actions";
 
 const RegisterForm = () => {
-  const [loading, setLoading] = useState(false);
   const { pending } = useFormStatus();
+  // console.log(pending)
 
   const form = useForm({
     resolver: zodResolver(RegisterSchema),
@@ -36,8 +35,7 @@ const RegisterForm = () => {
   });
 
   const handleSubmitHandler = (data: z.infer<typeof RegisterSchema>) => {
-    setLoading(true);
-    console.log(data);
+    registerHandler(data);
   };
 
   return (
@@ -137,7 +135,7 @@ const RegisterForm = () => {
             disabled={pending}
             className="w-full bg-gray-700 text-white active:scale-95 duration-200"
           >
-            {loading ? (
+            {pending ? (
               <p className=" animate-pulse">Requesting...</p>
             ) : (
               "Register"

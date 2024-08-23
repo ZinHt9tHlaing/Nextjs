@@ -1,13 +1,29 @@
 import { z } from "zod";
+import { checkEmailExists } from "./utils";
 
 export const RegisterSchema = z
   .object({
     name: z.string().min(1, {
       message: "Please enter your name first.",
     }),
-    email: z.string().email({
-      message: "Please enter a valid email address.",
-    }),
+    email: z
+      .string()
+      .email({
+        message: "Please enter a valid email address.",
+      })
+      .refine(
+        async (email) => {
+          const emailExists = await checkEmailExists(email);
+
+          if (emailExists) {
+            return false; 
+          }
+          return true;
+        },
+        {
+          message: "Email already exists in record.",
+        }
+      ),
     password: z.string().min(6, {
       message: "Password must be at least 6 characters long.",
     }),
