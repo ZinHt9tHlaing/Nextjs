@@ -3,7 +3,7 @@
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { signIn, signOut } from "./auth";
-import { RegisterSchema } from "@/schema";
+import { LoginSchema, RegisterSchema } from "@/schema";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 
@@ -31,3 +31,7 @@ export const registerHandler = async (data: z.infer<typeof RegisterSchema>) => {
 
   redirect("/");
 };
+
+export const loginHandler = async (data: z.infer<typeof LoginSchema>) => {
+  await signIn("credentials", data)
+}

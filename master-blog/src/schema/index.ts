@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { checkEmailExists } from "./utils";
+import { checkEmailExists, validateLoginData } from "./utils";
 
 export const RegisterSchema = z
   .object({
@@ -16,7 +16,7 @@ export const RegisterSchema = z
           const emailExists = await checkEmailExists(email);
 
           if (emailExists) {
-            return false; 
+            return false;
           }
           return true;
         },
@@ -36,11 +36,40 @@ export const RegisterSchema = z
     path: ["confirmPassword"],
   });
 
-export const LoginSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters long.",
-  }),
-});
+export const LoginSchema = z
+  .object({
+    email: z
+      .string()
+      .email({
+        message: "Please enter a valid email address.",
+      })
+      .refine(
+        async (email) => {
+          const emailExists = await checkEmailExists(email);
+
+          if (emailExists) {
+            return true;
+          }
+          return false;
+        },
+        {
+          message: "Email doesn't exist in record.",
+        }
+      ),
+    password: z.string().min(6, {
+      message: "Password must be at least 6 characters long.",
+    }),
+  })
+  .refine(
+    async (data) => {
+      const isMatch = await validateLoginData(data.email, data.password);
+      if (isMatch) {
+        return true;
+      }
+      return false;
+    },
+    {
+      message: "Invalid login credentials.",
+      path: ["password"],
+    }
+  );

@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <section>{children}</section>
+        <section className="md:h-[650px]">{children}</section>
       </body>
     </html>
   );

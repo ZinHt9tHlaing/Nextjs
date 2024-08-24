@@ -19,7 +19,7 @@ const CardWrapper = ({
   children,
 }: CardWrapperProps) => {
   return (
-    <Card className=" md:w-[600px] shadow-md">
+    <Card className=" md:w-[400px] shadow-md">
       <CardHeader>
         <AuthHeader title={title} label={label} />
       </CardHeader>

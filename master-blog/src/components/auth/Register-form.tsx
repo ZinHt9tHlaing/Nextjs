@@ -136,7 +136,7 @@ const RegisterForm = () => {
             className="w-full bg-gray-700 text-white active:scale-95 duration-200"
           >
             {pending ? (
-              <p className=" animate-pulse">Requesting...</p>
+              <p className=" animate-pulse pointer-events-none">Requesting...</p>
             ) : (
               "Register"
             )}
