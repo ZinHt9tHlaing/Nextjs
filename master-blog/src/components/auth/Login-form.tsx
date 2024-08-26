@@ -5,7 +5,6 @@ import CardWrapper from "./Card-wrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/schema";
 import { z } from "zod";
-import { format } from "node:path/win32";
 import {
   Form,
   FormControl,
@@ -98,7 +97,9 @@ const LoginForm = () => {
             className="w-full bg-gray-700 text-white active:scale-95 duration-200"
           >
             {loading ? (
-              <p className=" animate-pulse pointer-events-none">Requesting...</p>
+              <p className=" animate-pulse pointer-events-none">
+                Requesting...
+              </p>
             ) : (
               <h1>Login</h1>
             )}

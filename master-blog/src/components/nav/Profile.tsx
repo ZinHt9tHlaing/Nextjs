@@ -13,7 +13,7 @@ import { handleGithubLogout } from "@/lib/actions";
 
 const Profile = async () => {
   const session = await auth();
-  console.log(session);
+  // console.log(session);
 
   return (
     <div>

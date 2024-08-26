@@ -22,7 +22,7 @@ const Links = [
 
 const Navbar = async () => {
   const session = await auth();
-  console.log(session);
+  // console.log(session);
 
   return (
     <div className=" w-2/3 mx-auto flex items-center justify-between py-4 border-b-2">
