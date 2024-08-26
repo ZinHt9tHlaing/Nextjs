@@ -3,7 +3,7 @@
  * Doesn't need authentication
  * @type {string[]}
  */
-export const publicRoutes = ["/", "/faq"];
+export const publicRoutes = ["/", "/faq", "/about"];
 
 /**
  * Routes that are used for authentication
@@ -22,7 +22,3 @@ export const DEFAULT_HOME_REDIRECT = "/";
  * @type {string}
  */
 export const DEFAULT_LOGIN_REDIRECT = "/auth/register";
-
-
-
-

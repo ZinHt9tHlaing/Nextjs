@@ -13,7 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { log } from "console";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { GithubIcon } from "lucide-react";
