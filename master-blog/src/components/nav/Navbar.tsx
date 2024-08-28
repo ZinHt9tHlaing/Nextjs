@@ -27,7 +27,7 @@ const Navbar = async () => {
   return (
     <div className=" w-2/3 mx-auto flex items-center justify-between py-4 border-b-2">
       <div className="flex items-center">
-        <Link href="/" className=" font-bold text-3xl">
+        <Link href="/" className=" font-bold text-3xl hover:scale-105 active:scale-95 duration-300">
           M-BLOG
         </Link>
         <div className=" ms-5">

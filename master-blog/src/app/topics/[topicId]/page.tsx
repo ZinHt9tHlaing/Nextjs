@@ -1,6 +1,9 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { db } from "@/db";
+import paths from "@/lib/path";
 import Image from "next/image";
+import Link from "next/link";
 
 interface SingleTopicProps {
   params: {
@@ -31,12 +34,17 @@ const SingleTopic = async ({ params }: SingleTopicProps) => {
             className="w-full h-44 object-cover rounded-md"
           />
         </div>
-        <div className="col-span-2 space-y-1">
+        <div className="col-span-2 space-y-2">
           <h2 className="text-3xl font-bold">{topic?.name}</h2>
           <p className="font-medium text-muted-foreground text-sm tracking-wider">
             {topic?.description}
           </p>
           <Badge variant={"outline"}>@{topic?.creator}</Badge>
+          <Button asChild className="block w-fit">
+            <Link href={paths.CreatePost(topic?.name as string)}>
+              Create post for this topic
+            </Link>
+          </Button>
         </div>
       </div>
     </main>

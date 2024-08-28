@@ -16,14 +16,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useFormStatus } from "react-dom";
 import { Textarea } from "@/components/ui/textarea";
 import { createTopicHandler } from "@/lib/actions";
 import { toast } from "sonner";
 
 const CreateTopic = () => {
   const [loading, setLoading] = useState(false);
-  const { pending } = useFormStatus();
 
   const form = useForm({
     resolver: zodResolver(TopicSchema),
