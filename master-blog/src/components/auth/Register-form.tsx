@@ -18,8 +18,10 @@ import { Button } from "../ui/button";
 import { GithubIcon } from "lucide-react";
 import { useFormStatus } from "react-dom";
 import { handleGithubLogin, registerHandler } from "@/lib/actions";
+import { useState } from "react";
 
 const RegisterForm = () => {
+  const [loading, setLoading] = useState(false);
   const { pending } = useFormStatus();
   // console.log(pending)
 
@@ -34,7 +36,9 @@ const RegisterForm = () => {
   });
 
   const handleSubmitHandler = (data: z.infer<typeof RegisterSchema>) => {
+    setLoading(true);
     registerHandler(data);
+    setLoading(false);
   };
 
   return (
@@ -134,10 +138,12 @@ const RegisterForm = () => {
             disabled={pending}
             className="w-full bg-gray-700 text-white active:scale-95 duration-200"
           >
-            {pending ? (
-              <p className=" animate-pulse pointer-events-none">Requesting...</p>
+            {loading ? (
+              <p className=" animate-pulse pointer-events-none">
+                Requesting...
+              </p>
             ) : (
-              "Register"
+              <h1>Register</h1>
             )}
           </Button>
         </form>

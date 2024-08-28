@@ -35,7 +35,7 @@ const LoginForm = () => {
   const handleSubmitHandler = (data: z.infer<typeof LoginSchema>) => {
     setLoading(true);
     loginHandler(data);
-    setLoading(false);
+    // setLoading(false);
   };
 
   return (
@@ -93,7 +93,7 @@ const LoginForm = () => {
           </div>
           <Button
             size={"lg"}
-            disabled={pending}
+            disabled={loading}
             className="w-full bg-gray-700 text-white active:scale-95 duration-200"
           >
             {loading ? (

@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { Textarea } from "@/components/ui/textarea";
+import { createTopicHandler } from "@/lib/actions";
+import { toast } from "sonner";
 
 const CreateTopic = () => {
   const [loading, setLoading] = useState(false);
@@ -32,8 +34,18 @@ const CreateTopic = () => {
     },
   });
 
-  const handleSubmitHandler = (data: z.infer<typeof TopicSchema>) => {
-    console.log(data);
+  const handleSubmitHandler = async (data: z.infer<typeof TopicSchema>) => {
+    setLoading(true);
+    try {
+      await createTopicHandler(data);
+      setLoading(false);
+    } catch (error: unknown) {
+      toast("Something went wrong", {
+        description: "Please try again later.",
+      });
+      console.log(error);
+    }
+    setLoading(false);
   };
 
   return (
@@ -105,15 +117,15 @@ const CreateTopic = () => {
             </div>
             <Button
               size={"lg"}
-              disabled={pending}
+              disabled={loading}
               className="w-full bg-gray-700 text-white active:scale-95 duration-200"
             >
               {loading ? (
-                <p className=" animate-pulse pointer-events-none">
+                <p className=" animate-pulse pointer-events-none cursor-not-allowed">
                   Requesting...
                 </p>
               ) : (
-                <h1>Create Topic</h1>
+                <h1 className=" pointer-events-auto">Create Topic</h1>
               )}
             </Button>
           </form>

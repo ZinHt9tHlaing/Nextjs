@@ -86,3 +86,11 @@ model Authenticator {
  
   @@unique([userId, credentialID])
 }
+
+model Topic{
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  description   String
+  image         String?
+  creator       String
+}
