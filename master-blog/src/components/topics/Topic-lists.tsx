@@ -10,17 +10,17 @@ const TopicLists = async () => {
       id: true,
     },
   });
-  console.log(topics);
+  // console.log(topics);
 
   return (
     <div>
       {topics.map((topic) => (
         <Link
           key={topic.id}
-          href={paths.SingleTopic(topic.name)}
+          href={paths.SingleTopic(topic.id)}
           className={badgeVariants({ variant: "outline" })}
         >
-          {topic.name}
+          #{topic.name}
         </Link>
       ))}
     </div>
