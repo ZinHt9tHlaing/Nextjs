@@ -1,3 +1,4 @@
+import TopicLists from "@/components/topics/Topic-lists";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 
@@ -7,7 +8,13 @@ export default async function Home() {
 
   return (
     <main className="flex justify-center items-center space-x-2 mt-10">
-     <h1>Home Page</h1>
+      <div className=" grid grid-cols-3 w-full gap-4">
+        <div className="bg-black col-span-2">1</div>
+        <div className="col-span-1">
+          <h1 className="font-medium tracking-wide mb-3">Recent Topics</h1>
+          <TopicLists />
+        </div>
+      </div>
     </main>
   );
 }
