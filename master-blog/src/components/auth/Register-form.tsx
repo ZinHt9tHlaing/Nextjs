@@ -38,7 +38,7 @@ const RegisterForm = () => {
   const handleSubmitHandler = (data: z.infer<typeof RegisterSchema>) => {
     setLoading(true);
     registerHandler(data);
-    setLoading(false);
+    // setLoading(false);
   };
 
   return (
@@ -151,7 +151,7 @@ const RegisterForm = () => {
       <p className="my-4 text-muted-foreground text-center text-sm">or</p>
       <form action={handleGithubLogin}>
         <Button className="bg-black w-full hover:bg-gray-900 active:scale-95 duration-200">
-          <GithubIcon className="mr-2 h-4 w-4" /> Continue with Github
+          <GithubIcon className="mr-2 h-4 w-4 " /> Continue with Github
         </Button>
       </form>
     </CardWrapper>

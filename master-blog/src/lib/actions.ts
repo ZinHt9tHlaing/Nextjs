@@ -3,10 +3,12 @@
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { auth, signIn, signOut } from "./auth";
-import { LoginSchema, RegisterSchema, TopicSchema } from "@/schema";
+import { LoginSchema, PostSchema, RegisterSchema, TopicSchema } from "@/schema";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import paths from "./path";
+import { Post, Topic } from "@prisma/client";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 export const handleGithubLogin = async () => {
   await signIn("github");
@@ -30,7 +32,7 @@ export const registerHandler = async (data: z.infer<typeof RegisterSchema>) => {
     },
   });
 
-  redirect("/");
+  redirect(DEFAULT_LOGIN_REDIRECT);
 };
 
 export const loginHandler = async (data: z.infer<typeof LoginSchema>) => {
@@ -42,7 +44,7 @@ export const createTopicHandler = async (
 ) => {
   const session = await auth();
   const validateData = await TopicSchema.parseAsync(formData);
-  console.log(validateData);
+  // console.log(validateData);
 
   const { name, image, description } = validateData;
 
@@ -50,8 +52,10 @@ export const createTopicHandler = async (
     throw new Error("You must be logged in to create a topic");
   }
 
+  let topic: Topic;
+
   try {
-    await db.topic.create({
+    topic = await db.topic.create({
       data: {
         name,
         image,
@@ -62,5 +66,34 @@ export const createTopicHandler = async (
   } catch (error) {
     throw new Error("Something went wrong.");
   }
-  redirect(paths.SingleTopic(name));
+  redirect(paths.SingleTopic(topic.id));
+};
+
+export const createPostHandler = async (data: z.infer<typeof PostSchema>) => {
+  const session = await auth();
+
+  const validateData = await PostSchema.parseAsync(data);
+  // console.log(validateData);
+
+  const { title, content, topicId } = validateData;
+
+  if (!session?.user) {
+    throw new Error("You must be logged in to create a topic");
+  }
+
+  let post: Post;
+
+  try {
+    post = await db.post.create({
+      data: {
+        title,
+        content,
+        topicId,
+        userId: session.user.id as string,
+      },
+    });
+  } catch (error) {
+    throw new Error("Something went wrong.");
+  }
+  redirect(paths.SinglePost(topicId, post.id));
 };

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import CardWrapper from "@/components/topics/Card-wrapper";
 import { PostSchema } from "@/schema";
@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { createPostHandler } from "@/lib/actions";
 
 interface CreatePostProps {
   params: {
@@ -33,20 +34,21 @@ const CreatePost = ({ params }: CreatePostProps) => {
     resolver: zodResolver(PostSchema),
     defaultValues: {
       title: "",
-      description: "",
+      content: "",
+      topicId: topicId,
     },
   });
 
   const handleSubmitHandler = async (data: z.infer<typeof PostSchema>) => {
-    setLoading(true)
-    console.log(data);
+    setLoading(true);
+    await createPostHandler(data);
   };
 
   return (
     <main>
       <CardWrapper
         title="Create new post"
-        label={`create your own new post for ${topicId}`}
+        label={`create your own new post for ID - ${topicId}`}
       >
         <Form {...form}>
           <form
@@ -54,6 +56,24 @@ const CreatePost = ({ params }: CreatePostProps) => {
             className=" space-y-6"
           >
             <div className="space-y-4">
+              {/* Hidden Form */}
+              <FormField
+                control={form.control}
+                name="topicId"
+                render={({ field }) => (
+                  <FormItem hidden>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="text"
+                        className="border-gray-400"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
+
               {/* Title */}
               <FormField
                 control={form.control}
@@ -74,13 +94,13 @@ const CreatePost = ({ params }: CreatePostProps) => {
                 )}
               ></FormField>
 
-              {/* Description */}
+              {/* Content */}
               <FormField
                 control={form.control}
-                name="description"
+                name="content"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Content</FormLabel>
                     <FormControl>
                       <Textarea
                         {...field}

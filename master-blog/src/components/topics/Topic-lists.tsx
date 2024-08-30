@@ -20,7 +20,7 @@ const TopicLists = async () => {
           href={paths.SingleTopic(topic.id)}
           className={
             badgeVariants({ variant: "outline" }) +
-            "active:scale-95 duration-300"
+            "active:scale-90 duration-200"
           }
         >
           #{topic.name}

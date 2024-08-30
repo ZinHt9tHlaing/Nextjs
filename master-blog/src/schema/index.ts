@@ -97,12 +97,11 @@ export const TopicSchema = z.object({
 });
 
 export const PostSchema = z.object({
-  title: z
-    .string()
-    .min(3, {
-      message: "Post title must be at least 3 characters long.",
-    }), 
-  description: z.string().min(20, {
-    message: "Post description must be at least 20 characters long.",
+  title: z.string().min(3, {
+    message: "Post title must be at least 3 characters long.",
   }),
+  content: z.string().min(20, {
+    message: "Post content must be at least 20 characters long.",
+  }),
+  topicId: z.string(),
 });

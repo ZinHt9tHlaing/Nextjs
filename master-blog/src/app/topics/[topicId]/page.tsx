@@ -40,8 +40,8 @@ const SingleTopic = async ({ params }: SingleTopicProps) => {
             {topic?.description}
           </p>
           <Badge variant={"outline"}>@{topic?.creator}</Badge>
-          <Button asChild className="block w-fit">
-            <Link href={paths.CreatePost(topic?.name as string)}>
+          <Button asChild className="block w-fit active:scale-95 duration-200">
+            <Link href={paths.CreatePost(topic?.id as string)}>
               Create post for this topic
             </Link>
           </Button>

@@ -21,4 +21,4 @@ export const DEFAULT_HOME_REDIRECT = "/";
  * Routes will redirect users to /auth/login
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT = "/auth/register";
+export const DEFAULT_LOGIN_REDIRECT = "/auth/login";
