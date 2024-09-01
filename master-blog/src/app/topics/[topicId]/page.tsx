@@ -20,7 +20,7 @@ const SingleTopic = async ({ params }: SingleTopicProps) => {
     },
   });
 
-  console.log(topic);
+  // console.log(topic);
 
   return (
     <main className="text-center">

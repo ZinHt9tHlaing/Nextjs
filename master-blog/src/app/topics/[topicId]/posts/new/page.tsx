@@ -48,7 +48,7 @@ const CreatePost = ({ params }: CreatePostProps) => {
     <main>
       <CardWrapper
         title="Create new post"
-        label={`create your own new post for ID - ${topicId}`}
+        label={`create your own new post.`}
       >
         <Form {...form}>
           <form
