@@ -1,3 +1,4 @@
+import Post from "@/components/single-topic/post";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { db } from "@/db";
@@ -28,8 +29,8 @@ const SingleTopic = async ({ params }: SingleTopicProps) => {
       <Image
         src={topic?.image as string}
         alt={topic?.name as string}
-        width={300}
-        height={300}
+        width={200}
+        height={200}
         className="w-full h-80 object-cover rounded-md"
       />
 
@@ -37,13 +38,14 @@ const SingleTopic = async ({ params }: SingleTopicProps) => {
         {topic?.description}
       </p>
       <Badge variant={"outline"}>@{topic?.creator}</Badge>
-     <div className="flex justify-center my-5">
-     <Button asChild className="block w-fit active:scale-95 duration-200">
-        <Link href={paths.CreatePost(topic?.id as string)}>
-          Create post for this topic
-        </Link>
-      </Button>
-     </div>
+      <div className="flex justify-center my-5">
+        <Button asChild className="block w-fit active:scale-95 duration-200">
+          <Link href={paths.CreatePost(topic?.id as string)}>
+            Create post for this topic
+          </Link>
+        </Button>
+      </div>
+      <Post topicId={topic?.id as string} />
     </main>
   );
 };
