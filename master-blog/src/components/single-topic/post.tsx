@@ -14,6 +14,7 @@ const Post = async ({ topicId }: PostProps) => {
       id: true,
       title: true,
       topicId: true,
+      createdAt: true,
       user: {
         select: {
           name: true,
@@ -34,6 +35,7 @@ const Post = async ({ topicId }: PostProps) => {
             postId={post.id}
             topicId={topicId}
             username={post.user.name!}
+            date={post.createdAt}
           />
         ))}
       </div>
