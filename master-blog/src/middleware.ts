@@ -5,19 +5,22 @@ import {
   authRoutes,
   DEFAULT_HOME_REDIRECT,
   DEFAULT_LOGIN_REDIRECT,
+  publicRoutePatterns,
   publicRoutes,
 } from "./routes";
 
-export default middleware((req) => {
+export default middleware((req: any): Response | undefined => {
   // console.log(req);
-  // console.log("ROUTE => ", req.nextUrl.pathname);
-  // console.log("AUTH INFO => ", req.auth);
+  console.log("ROUTE => ", req.nextUrl.pathname);
+  console.log("AUTH INFO => ", req.auth);
 
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth; //* true or false
 
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname); //* true or false 
-  const isAuthRoute = authRoutes.includes(nextUrl.pathname); //* true or false 
+  const isPublicRoute =
+    publicRoutes.includes(nextUrl.pathname) ||
+    publicRoutePatterns.some((pattern) => pattern.test(nextUrl.pathname)); //* true or false
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname); //* true or false
 
   if (isAuthRoute) {
     if (isLoggedIn) {

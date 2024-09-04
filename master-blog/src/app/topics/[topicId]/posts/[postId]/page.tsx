@@ -41,13 +41,13 @@ const SinglePost = async ({ params }: SinglePostProps) => {
         <div className="py-2 flex gap-2 items-center">
           <Link href={paths.SingleTopic(post?.topicId as string)}>
             <div className="flex items-center gap-2">
-              <ClipboardPlus className="size-5" />
+              <ClipboardPlus className="size-4" />
               <p className="text-sm font-medium">{post?.topic.name}</p>
             </div>
           </Link>
           |
           <div className="flex items-center gap-2">
-            <User className="size-5" />
+            <User className="size-4" />
             <p className="text-sm font-medium">{post?.user.name}</p>
           </div>
         </div>

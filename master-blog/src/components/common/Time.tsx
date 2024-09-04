@@ -9,7 +9,7 @@ type TimeProps = {
 const Time = ({ date }: TimeProps) => {
   return (
     <div className="flex items-center gap-2">
-      <Clock className="size-5" />
+      <Clock className="size-4" />
       <p className="text-sm font-medium">
         {formatDistanceToNow(new Date(date), {
           includeSeconds: true,
