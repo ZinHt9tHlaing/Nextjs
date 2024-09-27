@@ -68,7 +68,7 @@ const SinglePost = async ({ params }: SinglePostProps) => {
             Only login user to discuss the posts.
           </p>
           <Link href={"/auth/login"}>
-            <p className="underline font-bold text-lg active:scale-95 duration-200">
+            <p className="underline font-bold text-lg active:scale-95 hover:scale-105 duration-200">
               Login here
             </p>
           </Link>

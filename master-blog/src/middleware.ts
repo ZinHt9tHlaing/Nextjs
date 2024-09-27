@@ -11,8 +11,8 @@ import {
 
 export default middleware((req: any): Response | undefined => {
   // console.log(req);
-  console.log("ROUTE => ", req.nextUrl.pathname);
-  console.log("AUTH INFO => ", req.auth);
+  // console.log("ROUTE => ", req.nextUrl.pathname);
+  // console.log("AUTH INFO => ", req.auth);
 
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth; //* true or false

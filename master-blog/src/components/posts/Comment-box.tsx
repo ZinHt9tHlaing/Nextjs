@@ -30,7 +30,7 @@ const CommentBox = () => {
 
   const handleSubmitHandler = (data: z.infer<typeof DiscussSchema>) => {
     setLoading(true);
-    console.log(data);
+    // console.log(data);
   };
 
   return (

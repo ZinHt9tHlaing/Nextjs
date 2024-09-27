@@ -3,7 +3,7 @@
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { auth, signIn, signOut } from "./auth";
-import { LoginSchema, PostSchema, RegisterSchema, TopicSchema } from "@/schema";
+import { DiscussSchema, LoginSchema, PostSchema, RegisterSchema, TopicSchema } from "@/schema";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import paths from "./path";
@@ -97,3 +97,9 @@ export const createPostHandler = async (data: z.infer<typeof PostSchema>) => {
   }
   redirect(paths.SinglePost(topicId, post.id));
 };
+
+export const createCommentHandler = async (
+  data: z.infer<typeof DiscussSchema>
+) => {
+  const session = await auth();
+}
