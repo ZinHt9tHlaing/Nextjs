@@ -1,4 +1,6 @@
+import CustomButton from "@/components/custom-button";
 import { createData, readData } from "@/server/actions";
+import Image from "next/image";
 
 export default async function Home() {
   const { error, success } = await readData();
@@ -11,16 +13,18 @@ export default async function Home() {
     <main>
       <h1 className="text-2xl font-bold">Todos</h1>
       {success?.map((todo) => (
-        <p key={todo.id}>{todo.title}</p>
+        <div key={todo.id}>
+          <p>{todo.title}</p>
+        </div>
       ))}
-      <div>
+      <div className="">
         <form action={createData}>
           <input
             type="text"
             name="todoTitle"
-            className="bg-transparent border-2 px-2 border-white"
+            className="bg-transparent border border-white"
           />
-          <button type="submit">Add new todo</button>
+          <CustomButton />
         </form>
       </div>
     </main>

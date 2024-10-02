@@ -1,5 +1,5 @@
 {
-  "name": "drizzle-postgresql",
+  "name": "drizzle",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "@neondatabase/serverless": "^0.9.5",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
-    "next": "14.2.13",
+    "next": "14.2.14",
     "react": "^18",
     "react-dom": "^18"
   },
