@@ -3,6 +3,7 @@
 import { db } from "@/server";
 import { todo } from "./schema";
 import { revalidatePath } from "next/cache";
+import { eq } from "drizzle-orm";
 
 export const readData = async () => {
   const todos = await db.query.todo.findMany();
@@ -19,5 +20,14 @@ export const createData = async (formData: FormData) => {
     throw new Error("No todo title found.");
   }
   await db.insert(todo).values({ title: todoTitle });
+  revalidatePath("/");
+};
+
+export const deleteData = async (formData: FormData) => {
+  const id = Number(formData.get("id"));
+  if (!id) {
+    throw new Error("No id found.");
+  }
+  await db.delete(todo).where(eq(todo.id, id));
   revalidatePath("/");
 };
