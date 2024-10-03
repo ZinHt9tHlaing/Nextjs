@@ -4,6 +4,7 @@ import { db } from "@/server";
 import { todo } from "./schema";
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
 
 export const readData = async () => {
   const todos = await db.query.todo.findMany();
@@ -30,4 +31,15 @@ export const deleteData = async (formData: FormData) => {
   }
   await db.delete(todo).where(eq(todo.id, id));
   revalidatePath("/");
+};
+
+export const updateData = async (formData: FormData) => {
+  const todoTitle = formData.get("title") as string;
+  const todoID = Number(formData.get("id"));
+
+  if (!todoTitle) {
+    throw new Error("No todo title found.");
+  }
+  await db.update(todo).set({ title: todoTitle }).where(eq(todo.id, todoID));
+  redirect("/");
 };
