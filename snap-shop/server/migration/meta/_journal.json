@@ -8,6 +8,13 @@
       "when": 1728029805127,
       "tag": "0000_glorious_ronan",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1728296761614,
+      "tag": "0001_illegal_bruce_banner",
+      "breakpoints": true
     }
   ]
 }
