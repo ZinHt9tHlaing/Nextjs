@@ -17,7 +17,7 @@ const ProviderLogin = () => {
             callbackUrl: "/",
           })
         }
-        className="border border-black -transition-transform active:scale-95 duration-200"
+        className=" -transition-transform active:scale-95 duration-200"
       >
         <p className="flex gap-2 items-center">
           <FcGoogle /> Login with Google
@@ -31,7 +31,7 @@ const ProviderLogin = () => {
             callbackUrl: "/",
           })
         }
-        className="border border-black -transition-transform active:scale-95 duration-200"
+        className="-transition-transform active:scale-95 duration-200"
       >
         <p className="flex gap-2 items-center">
           <FaGithub /> Login with Github
