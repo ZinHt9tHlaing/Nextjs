@@ -7,7 +7,7 @@ import Link from "next/link";
 import { LogIn } from "lucide-react";
 
 const UserBtn = ({ user, expires }: Session) => {
-  console.log(user);
+  // console.log(user);
 
   return (
     <div>

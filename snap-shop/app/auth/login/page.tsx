@@ -16,8 +16,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useAction } from "next-safe-action/hooks";
+import { login } from "@/server/actions/login-action";
+import { cn } from "@/lib/utils";
 
 const Login = () => {
+  const { execute, status, result, isPending } = useAction(login);
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -27,7 +32,11 @@ const Login = () => {
   });
 
   const handleOnSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log(values);
+    // const { email, password } = values;
+    execute({
+      email: values.email,
+      password: values.password,
+    });
   };
 
   return (
@@ -81,7 +90,22 @@ const Login = () => {
               <Link href={"/auth/reset"}>Forgot password?</Link>
             </Button>
           </div>
-          <Button className="w-full mb-4">Login</Button>
+          {/* <Button
+            className={cn(
+              "w-full my-4 bg-primary ",
+              status === "executing" && "text-neutral-200"
+            )}
+          >
+            Login
+          </Button> */}
+          {isPending ? (
+            <Button className="w-full my-4 bg-primary ">
+              <p className="w-4 h-4 border-4 border-gray-200 border-t-transparent rounded-full animate-spin me-2"></p>
+              Login
+            </Button>
+          ) : (
+            <Button className="w-full my-4 bg-primary">Login</Button>
+          )}
         </form>
       </Form>
     </AuthForm>
