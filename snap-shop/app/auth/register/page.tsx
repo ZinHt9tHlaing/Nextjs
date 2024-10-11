@@ -24,7 +24,7 @@ const Register = () => {
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       password: "",
     },
@@ -43,9 +43,9 @@ const Register = () => {
   });
 
   const handleOnSubmit = (values: z.infer<typeof registerSchema>) => {
-    // const { username, email, password } = values;
+    // const { name, email, password } = values;
     execute({
-      username: values.username,
+      name: values.name,
       email: values.email,
       password: values.password,
     });
@@ -61,13 +61,13 @@ const Register = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleOnSubmit)}>
           <div>
-            {/* username */}
+            {/* name */}
             <FormField
-              name="username"
+              name="name"
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>name</FormLabel>
                   <FormControl>
                     <Input placeholder="snapshot" {...field} />
                   </FormControl>

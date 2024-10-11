@@ -1,8 +1,8 @@
 import * as z from "zod";
 
 export const registerSchema = z.object({
-  username: z.string().min(4, {
-    message: "Please enter a valid username",
+  name: z.string().min(4, {
+    message: "Please enter a valid name",
   }),
   email: z.string().email({
     message: "Please enter a valid email address",
