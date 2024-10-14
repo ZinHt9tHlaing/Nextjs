@@ -99,8 +99,11 @@ const Login = () => {
             Login
           </Button> */}
           {isPending ? (
-            <Button className="w-full my-4 bg-primary ">
-              <p className="w-4 h-4 border-4 border-gray-200 border-t-transparent rounded-full animate-spin me-2"></p>
+            <Button
+              className="w-full my-4 cursor-not-allowed"
+              disabled={status === "executing"}
+            >
+              <p className="w-4 h-4 border-4 border-gray-300 border-t-transparent rounded-full animate-spin me-2"></p>
               Login
             </Button>
           ) : (

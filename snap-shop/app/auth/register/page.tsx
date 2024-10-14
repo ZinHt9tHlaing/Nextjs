@@ -33,12 +33,17 @@ const Register = () => {
   const { execute, status, result, isPending } = useAction(register, {
     onSuccess({ data }) {
       form.reset();
-      toast.success(data?.success, {
-        action: {
-          label: "Open Gmail",
-          onClick: () => window.open("https://mail.google.com"),
-        },
-      });
+      if (data?.error) {
+        toast.error(data?.error);
+      }
+      if (data?.success) {
+        toast.success(data?.success, {
+          action: {
+            label: "Open Gmail",
+            onClick: () => window.open("https://mail.google.com"),
+          },
+        });
+      }
     },
   });
 
@@ -118,8 +123,11 @@ const Register = () => {
             Register
           </Button> */}
           {isPending ? (
-            <Button className="w-full my-4 bg-purple-500 cursor-not-allowed">
-              <p className="w-4 h-4 border-4 border-gray-200 border-t-transparent rounded-full animate-spin me-2"></p>
+            <Button
+              className="w-full my-4 cursor-not-allowed"
+              disabled={status === "executing"}
+            >
+              <p className="w-4 h-4 border-4 border-gray-300 border-t-transparent rounded-full animate-spin me-2"></p>
               Register
             </Button>
           ) : (
