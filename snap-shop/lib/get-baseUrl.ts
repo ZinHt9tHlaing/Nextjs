@@ -1,5 +1,5 @@
-export const getBaseUrl = async () => {
-  if (typeof window !== undefined) return "";
+export const getBaseUrl = () => {
+  if (typeof window !== "undefined") return "";
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return "http://localhost:3000";
+  return `http://localhost:3000`;
 };

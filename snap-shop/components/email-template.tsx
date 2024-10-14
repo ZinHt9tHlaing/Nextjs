@@ -12,16 +12,13 @@ import {
 } from "@react-email/components";
 import { ShoppingBasket } from "lucide-react";
 import * as React from "react";
-
 interface EmailConfirmationTemplateProps {
   userFirstName?: string;
   confirmEmailLink?: string;
 }
-
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
-
 export const EmailConfirmationTemplate = ({
   userFirstName,
   confirmEmailLink,
@@ -53,12 +50,10 @@ export const EmailConfirmationTemplate = ({
     </Html>
   );
 };
-
 EmailConfirmationTemplate.PreviewProps = {
   userFirstName: "SnapShop",
   resetPasswordLink: "https://codehubmm.com",
 } as EmailConfirmationTemplateProps;
-
 export default EmailConfirmationTemplate;
 
 const main = {
@@ -82,7 +77,7 @@ const text = {
 };
 
 const button = {
-  backgroundColor: "#007ee6",
+  backgroundColor: "#16A34A",
   borderRadius: "4px",
   color: "#fff",
   fontFamily: "'Open Sans', 'Helvetica Neue', Arial",
@@ -92,8 +87,4 @@ const button = {
   display: "block",
   width: "210px",
   padding: "14px 7px",
-};
-
-const anchor = {
-  textDecoration: "underline",
 };
