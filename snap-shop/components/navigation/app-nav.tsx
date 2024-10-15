@@ -3,6 +3,7 @@ import { NavLogo, UserBtn } from "./index";
 
 const AppNav = async () => {
   const session = await auth();
+  // console.log(session);
 
   return (
     <nav className="flex justify-between items-center py-4">
