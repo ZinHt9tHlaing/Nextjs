@@ -22,6 +22,13 @@
       "when": 1728577923972,
       "tag": "0002_chubby_excalibur",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1729527146713,
+      "tag": "0003_swift_maria_hill",
+      "breakpoints": true
     }
   ]
 }

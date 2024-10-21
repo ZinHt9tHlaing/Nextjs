@@ -10,7 +10,7 @@ import { sendEmail } from "./email";
 import { signIn } from "../auth";
 import { AuthError } from "next-auth";
 
-export const login = actionClient
+export const loginAction = actionClient
   .schema(loginSchema)
   .action(async ({ parsedInput: { email, password } }) => {
     // console.log("I am server action => ", email, password);

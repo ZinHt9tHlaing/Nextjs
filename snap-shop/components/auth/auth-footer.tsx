@@ -8,9 +8,9 @@ type AuthFooterProps = {
 
 const AuthFooter = ({ footerLabel, footerHref }: AuthFooterProps) => {
   return (
-    <Button variant={"link"} className="pl-0" asChild>
+    <Button variant={"link"} className="pl-0 w-full" asChild>
       <Link href={footerHref}>
-        <p className="active:scale-95 -transition-transform duration-200">
+        <p className="active:scale-95 mx-auto -transition-transform duration-200">
           {footerLabel}
         </p>
       </Link>

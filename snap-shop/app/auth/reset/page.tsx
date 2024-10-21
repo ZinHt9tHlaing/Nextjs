@@ -1,7 +1,6 @@
 "use client";
 
 import AuthForm from "@/components/auth/auth-form";
-import { loginSchema } from "@/types/login-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -20,42 +19,51 @@ import { useAction } from "next-safe-action/hooks";
 import { loginAction } from "@/server/actions/login-action";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { resetPasswordSchema } from "@/types/reset-password-schema";
+import { resetPasswordAction } from "@/server/actions/reset-password-action";
 
 const Login = () => {
-  const { execute, status, result, isPending } = useAction(loginAction, {
-    onSuccess({ data }) {
-      form.reset();
-      if (data?.error) {
-        toast.error(data?.error);
-      }
-      if (data?.success) {
-        toast.success(data?.success);
-      }
-    },
-  });
+  const { execute, status, result, isPending } = useAction(
+    resetPasswordAction,
+    {
+      onSuccess({ data }) {
+        console.log(data);
+        form.reset();
+        if (data?.error) {
+          toast.error(data?.error);
+        }
+        if (data?.success) {
+          toast.success(data?.success, {
+            action: {
+              label: "Open Gmail",
+              onClick: () => window.open("https://mail.google.com"),
+            },
+          });
+        }
+      },
+    }
+  );
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof resetPasswordSchema>>({
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
-  const handleOnSubmit = (values: z.infer<typeof loginSchema>) => {
-    // const { email, password } = values;
+  const handleOnSubmit = (values: z.infer<typeof resetPasswordSchema>) => {
+    const { email } = values;
     execute({
-      email: values.email,
-      password: values.password,
+      email,
     });
   };
 
   return (
     <AuthForm
-      formTitle="Login to your account"
-      footerLabel="Don't u have an account?"
-      footerHref="/auth/register"
-      showProvider
+      formTitle="Reset your Password"
+      footerLabel="Already have an account?"
+      footerHref="/auth/login"
+      showProvider={false}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleOnSubmit)}>
@@ -72,34 +80,13 @@ const Login = () => {
                       type="email"
                       placeholder="snapshop@gmail.com"
                       {...field}
+                      disabled={status === "executing"}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/* password */}
-            <FormField
-              name="password"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="******" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button
-              size={"sm"}
-              variant={"link"}
-              className="pl-0 mb-2 -transition-transform active:scale-95 duration-200"
-              asChild
-            >
-              <Link href={"/auth/reset"}>Forgot password?</Link>
-            </Button>
           </div>
           {/* <Button
             className={cn(

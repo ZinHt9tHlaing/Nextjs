@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAction } from "next-safe-action/hooks";
-import { register } from "@/server/actions/register-action";
+import { registerAction } from "@/server/actions/register-action";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -30,7 +30,7 @@ const Register = () => {
     },
   });
 
-  const { execute, status, result, isPending } = useAction(register, {
+  const { execute, status, result, isPending } = useAction(registerAction, {
     onSuccess({ data }) {
       form.reset();
       if (data?.error) {

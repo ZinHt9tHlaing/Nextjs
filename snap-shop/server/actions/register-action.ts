@@ -9,7 +9,7 @@ import { users } from "../schema";
 import { generateEmailVerificationToken } from "./tokens";
 import { sendEmail } from "./email";
 
-export const register = actionClient
+export const registerAction = actionClient
   .schema(registerSchema)
   .action(async ({ parsedInput: { name, email, password } }) => {
     // console.log("I am server action => ", ိ, email, password);
@@ -22,6 +22,7 @@ export const register = actionClient
 
     if (existingUser) {
       if (!existingUser.emailVerified) {
+        // array ပုံစံနဲ့လာတာ
         const verificationToken = await generateEmailVerificationToken(email);
         // send verification email
         await sendEmail(
@@ -43,6 +44,7 @@ export const register = actionClient
     });
 
     // generate verification token for email expires in 30 minutes
+    //Todo: Account အသစ်ဖွင့်လည်း userကို verification tokenကို ပို့ပေးရမယ်
     const verificationToken = await generateEmailVerificationToken(email);
     await sendEmail(
       verificationToken[0].email,
