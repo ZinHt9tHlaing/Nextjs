@@ -14,9 +14,11 @@ import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { LogIn, LogOut, Settings, Truck } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const UserBtn = ({ user, expires }: Session) => {
   // console.log(user);
+  const router = useRouter();
 
   return (
     <div>
@@ -62,7 +64,10 @@ const UserBtn = ({ user, expires }: Session) => {
               <Truck className="size-5 mr-3 group-hover:translate-x-1 group-hover:text-primary transition-all ease-in-out duration-300" />
               <span className="text-sm font-medium">My Orders</span>
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer group hover:bg-primary/10 duration-300">
+            <DropdownMenuItem
+              onClick={() => router.push("/dashboard/settings")}
+              className="cursor-pointer group hover:bg-primary/10 duration-300"
+            >
               <Settings className="size-5 mr-3 group-hover:rotate-90 group-hover:text-primary transition-all ease-in-out duration-300" />
               <span className="text-sm font-medium">Setting</span>
             </DropdownMenuItem>

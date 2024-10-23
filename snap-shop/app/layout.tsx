@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-7xl mx-auto px-4 lg:px-8`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-6xl mx-auto px-6 lg:px-8`}
       >
         <AppNav />
         <section>
