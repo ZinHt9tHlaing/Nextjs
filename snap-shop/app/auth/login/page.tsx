@@ -72,6 +72,7 @@ const Login = () => {
                       type="email"
                       placeholder="snapshop@gmail.com"
                       {...field}
+                      disabled={status === "executing"}
                     />
                   </FormControl>
                   <FormMessage />
@@ -86,7 +87,12 @@ const Login = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="******" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="******"
+                      {...field}
+                      disabled={status === "executing"}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

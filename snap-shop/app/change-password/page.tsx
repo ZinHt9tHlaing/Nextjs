@@ -19,12 +19,16 @@ import { useAction } from "next-safe-action/hooks";
 import { loginAction } from "@/server/actions/login-action";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { resetPasswordSchema } from "@/types/reset-password-schema";
-import { resetPasswordAction } from "@/server/actions/reset-password-action";
+import { changePasswordSchema } from "@/types/change-password";
+import { changePasswordAction } from "@/server/actions/change-password";
+import { useSearchParams } from "next/navigation";
 
-const ResetPassword = () => {
+const ChangePassword = () => {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
   const { execute, status, result, isPending } = useAction(
-    resetPasswordAction,
+    changePasswordAction,
     {
       onSuccess({ data }) {
         console.log(data);
@@ -44,23 +48,24 @@ const ResetPassword = () => {
     }
   );
 
-  const form = useForm<z.infer<typeof resetPasswordSchema>>({
-    resolver: zodResolver(resetPasswordSchema),
+  const form = useForm<z.infer<typeof changePasswordSchema>>({
+    resolver: zodResolver(changePasswordSchema),
     defaultValues: {
-      email: "",
+      password: "",
     },
   });
 
-  const handleOnSubmit = (values: z.infer<typeof resetPasswordSchema>) => {
-    const { email } = values;
+  const handleOnSubmit = (values: z.infer<typeof changePasswordSchema>) => {
+    const { password } = values;
     execute({
-      email,
+      password,
+      token,
     });
   };
 
   return (
     <AuthForm
-      formTitle="Reset your Password"
+      formTitle="Change your password"
       footerLabel="Already have an account?"
       footerHref="/auth/login"
       showProvider={false}
@@ -70,15 +75,15 @@ const ResetPassword = () => {
           <div>
             {/* email */}
             <FormField
-              name="email"
+              name="password"
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>New Password</FormLabel>
                   <FormControl>
                     <Input
-                      type="email"
-                      placeholder="snapshop@gmail.com"
+                      type="password"
+                      placeholder="****"
                       {...field}
                       disabled={status === "executing"}
                     />
@@ -113,4 +118,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ChangePassword;

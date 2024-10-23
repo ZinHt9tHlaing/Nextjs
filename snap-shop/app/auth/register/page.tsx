@@ -74,7 +74,11 @@ const Register = () => {
                 <FormItem>
                   <FormLabel>name</FormLabel>
                   <FormControl>
-                    <Input placeholder="snapshot" {...field} />
+                    <Input
+                      placeholder="snapshot"
+                      {...field}
+                      disabled={status === "executing"}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,6 +96,7 @@ const Register = () => {
                       type="email"
                       placeholder="snapshop@gmail.com"
                       {...field}
+                      disabled={status === "executing"}
                     />
                   </FormControl>
                   <FormMessage />
@@ -106,7 +111,12 @@ const Register = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="******" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="******"
+                      {...field}
+                      disabled={status === "executing"}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
