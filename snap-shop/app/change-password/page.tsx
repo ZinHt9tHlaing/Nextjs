@@ -22,6 +22,7 @@ import { toast } from "sonner";
 import { changePasswordSchema } from "@/types/change-password";
 import { changePasswordAction } from "@/server/actions/change-password";
 import { useSearchParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const ChangePassword = () => {
   const searchParams = useSearchParams();
@@ -37,12 +38,8 @@ const ChangePassword = () => {
           toast.error(data?.error);
         }
         if (data?.success) {
-          toast.success(data?.success, {
-            action: {
-              label: "Open Gmail",
-              onClick: () => window.open("https://mail.google.com"),
-            },
-          });
+          signOut({ callbackUrl: "/auth/login" });
+          toast.success(data?.success);
         }
       },
     }

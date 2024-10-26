@@ -9,6 +9,7 @@ import { resetPasswordToken, users } from "../schema";
 import { checkPasswordResetTokenByToken } from "./tokens";
 import { Pool } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-serverless";
+import { redirect } from "next/navigation";
 
 export const changePasswordAction = actionClient
   .schema(changePasswordSchema)
@@ -51,6 +52,5 @@ export const changePasswordAction = actionClient
         .delete(resetPasswordToken)
         .where(eq(resetPasswordToken.id, existingUser.id));
     });
-
     return { success: "Password changed" };
   });

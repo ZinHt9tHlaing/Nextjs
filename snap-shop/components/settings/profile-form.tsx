@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useAction } from "next-safe-action/hooks";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -23,9 +22,10 @@ import { updateDisplayNameAction } from "@/server/actions/settings";
 type ProfileFormProps = {
   name: string;
   email: string;
+  setIsOpen: () => void;
 };
 
-const ProfileForm = ({ name, email }: ProfileFormProps) => {
+const ProfileForm = ({ name, email, setIsOpen }: ProfileFormProps) => {
   const { execute, status, result, isPending } = useAction(
     updateDisplayNameAction,
     {
@@ -35,6 +35,7 @@ const ProfileForm = ({ name, email }: ProfileFormProps) => {
           toast.error(data?.error);
         }
         if (data?.success) {
+          setIsOpen();
           toast.success(data?.success);
         }
       },

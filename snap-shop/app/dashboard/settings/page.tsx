@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 const Settings = async () => {
   const session = await auth();
   if (!session?.user) return redirect("/");
+  console.log(session);
 
   return (
     <SettingsCard title="Settings" description="Manage your account settings">
@@ -18,8 +19,12 @@ const Settings = async () => {
           <ProfileCard session={session} />
         </div>
         <div className="space-y-4 flex-1">
-          <ChangePassword />
-          <TwoFactor />
+          {!session.user.isOauth && (
+            <>
+              <ChangePassword email={session.user.email!} />
+              <TwoFactor />
+            </>
+          )}
         </div>
       </main>
     </SettingsCard>

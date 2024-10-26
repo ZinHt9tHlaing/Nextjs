@@ -27,14 +27,21 @@ import {
 import { Button } from "../ui/button";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import ProfileForm from "./profile-form";
+import { useState } from "react";
 
 type ProfileCardProps = {
   session: Session;
 };
 
 const ProfileCard = ({ session }: ProfileCardProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const isDesktop = useMediaQuery("(min-width:768px)");
   // console.log(isDesktop);
+
+  const handleIsOpen = () => {
+    setIsOpen(false);
+  };
 
   return (
     <SettingsCard>
@@ -54,11 +61,11 @@ const ProfileCard = ({ session }: ProfileCardProps) => {
           </div>
         </div>
         {isDesktop ? (
-          <Dialog>
+          <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
               <UserRoundPen className="size-5 cursor-pointer text-muted-foreground hover:text-black hover:scale-110 active:scale-95 duration-200" />
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="mx-4 lg:mx-0">
               <DialogHeader>
                 <DialogTitle>Edit Profile</DialogTitle>
                 <DialogDescription>
@@ -68,6 +75,7 @@ const ProfileCard = ({ session }: ProfileCardProps) => {
               <ProfileForm
                 name={session.user?.name!}
                 email={session.user?.email!}
+                setIsOpen={handleIsOpen}
               />
               <DialogFooter>
                 <DialogClose asChild>
@@ -82,11 +90,11 @@ const ProfileCard = ({ session }: ProfileCardProps) => {
             </DialogContent>
           </Dialog>
         ) : (
-          <Drawer>
+          <Drawer open={isOpen} onOpenChange={setIsOpen}>
             <DrawerTrigger asChild>
               <UserRoundPen className="size-5 cursor-pointer text-muted-foreground hover:text-black hover:scale-110 active:scale-95 duration-200" />
             </DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent className="mx-4 lg:mx-0">
               <DrawerHeader>
                 <DrawerTitle>Edit Profile</DrawerTitle>
                 <DrawerDescription>
@@ -96,6 +104,7 @@ const ProfileCard = ({ session }: ProfileCardProps) => {
               <ProfileForm
                 name={session.user?.name!}
                 email={session.user?.email!}
+                setIsOpen={handleIsOpen}
               />
               <DrawerFooter>
                 <DrawerClose asChild>
