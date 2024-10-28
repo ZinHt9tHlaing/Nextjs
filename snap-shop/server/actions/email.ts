@@ -2,10 +2,12 @@
 
 import EmailConfirmationTemplate from "@/components/email-template";
 import ResetPasswordEmail from "@/components/password-reset-email-template";
+import TwoFactorMail from "@/components/two-factor-mail";
 import { getBaseUrl } from "@/lib/get-baseUrl";
 import { Resend } from "resend";
 
 const currentBaseUrl = getBaseUrl();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendEmail = async (
   email: string,
@@ -13,8 +15,6 @@ export const sendEmail = async (
   userFirstName: string
 ) => {
   const confirmLink = `${currentBaseUrl}/confirm-email?token=${expireToken}`;
-
-  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const { data, error } = await resend.emails.send({
     from: "onboarding@resend.dev",
@@ -39,13 +39,26 @@ export const sendPasswordResetEmail = async (
 ) => {
   const resetLink = `${currentBaseUrl}/change-password?token=${expireToken}`;
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
-
   const { data, error } = await resend.emails.send({
     from: "onboarding@resend.dev",
     to: email,
     subject: "Reset Your Password - Alert from SnapShop",
     react: ResetPasswordEmail({ resetPasswordLink: resetLink }),
+  });
+
+  if (error) {
+    console.log(error);
+  }
+};
+
+// ----------------------- two factor -------------------------
+
+export const sendTwoFactorEmail = async (email: string, code: string) => {
+  const { data, error } = await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: email,
+    subject: "Two Factor Authentication Code - SnapShop",
+    react: TwoFactorMail({ code }),
   });
 
   if (error) {
