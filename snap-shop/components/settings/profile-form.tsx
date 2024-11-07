@@ -63,7 +63,7 @@ const ProfileForm = ({ name, email, setIsOpen }: ProfileFormProps) => {
           className="space-y-4 px-4 lg:px-0"
         >
           <div>
-            {/* email */}
+            {/* name */}
             <FormField
               name="name"
               control={form.control}

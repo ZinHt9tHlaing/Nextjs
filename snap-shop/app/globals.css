@@ -66,6 +66,6 @@ body[data-scroll-locked].mx-auto {
   padding-right: 1.5rem /* 24px */;
 }
 
-/* [data-ut-element="button"][data-state="uploading"]::after {
-  @apply bg-primary/80;
-} */
+[data-ut-element="button"][data-state="uploading"]::after {
+  @apply bg-primary/70;
+}

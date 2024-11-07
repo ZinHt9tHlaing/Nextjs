@@ -15,10 +15,10 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { twoFactorSchema } from "@/types/settings-schema";
 import { useAction } from "next-safe-action/hooks";
-import { twoFactorToggler } from "@/server/actions/settings";
 import { toast } from "sonner";
 import { Switch } from "../ui/switch";
 import { cn } from "@/lib/utils";
+import { twoFactorTogglerAction } from "@/server/actions/settings";
 
 type TwoFactorProps = {
   isTwoFactorEnabled: boolean;
@@ -34,7 +34,7 @@ const TwoFactor = ({ isTwoFactorEnabled, email }: TwoFactorProps) => {
     },
   });
 
-  const { execute, isPending, status } = useAction(twoFactorToggler, {
+  const { execute, isPending, status } = useAction(twoFactorTogglerAction, {
     onSuccess({ data }) {
       if (data?.error) {
         toast.error(data?.error);
