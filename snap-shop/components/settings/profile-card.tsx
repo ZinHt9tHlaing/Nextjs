@@ -53,10 +53,12 @@ const ProfileCard = ({ session }: ProfileCardProps) => {
             email={session.user?.email!}
           />
           <div>
-            <h2 className="font-semibold text-xl">{session.user?.name}</h2>
             <p className="text-sm font-medium text-muted-foreground">
-              {session.user?.email}
+              Display Name
             </p>
+            <h2 className="font-semibold text-xl">@{session.user?.name}</h2>
+            <p className="text-sm font-medium text-muted-foreground">Email:</p>
+            <p className="text-base font-medium">{session.user?.email}</p>
           </div>
         </div>
         {isDesktop ? (
