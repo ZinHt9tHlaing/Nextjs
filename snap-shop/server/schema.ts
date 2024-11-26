@@ -6,6 +6,8 @@ import {
   integer,
   pgEnum,
   boolean,
+  serial,
+  real,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
