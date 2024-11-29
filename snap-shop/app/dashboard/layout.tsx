@@ -9,7 +9,6 @@ import {
   Upload,
 } from "lucide-react";
 import React from "react";
-
 const publicRoutes = [
   {
     label: "Orders",
@@ -39,7 +38,6 @@ const privateRoutes = [
     icons: <Package size={16} />,
   },
 ];
-
 export default async function Layout({
   children,
 }: Readonly<{

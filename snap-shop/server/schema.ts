@@ -98,3 +98,11 @@ export const resetPasswordToken = pgTable(
     compoundKey: primaryKey({ columns: [vt.id, vt.token] }),
   })
 );
+
+export const products = pgTable("products", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  price: real("price").notNull(),
+  createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
+});
